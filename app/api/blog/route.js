@@ -2,7 +2,6 @@ import { ConnectDB } from "@/lib/config/db";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import BlogModel from "@/lib/models/BlogModel";
-import { log } from "console";
 
 const LoadDB = async () => {
   await ConnectDB();
@@ -36,5 +35,5 @@ export async function POST(request) {
   await BlogModel.create(blogData);
   console.log("blog saved");
 
-  return NextResponse.json({ success: true, mes: "blog added" });
+  return NextResponse.json({ success: true, msg: "blog added" });
 }
