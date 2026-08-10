@@ -21,8 +21,8 @@ const page = ({ params }) => {
   };
 
   useEffect(() => {
-    fetchBlogData();
-  }, []);
+    fetchBlogData()
+  },[]);
 
   return data ? (
     <>
