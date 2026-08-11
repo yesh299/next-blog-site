@@ -5,24 +5,24 @@ import Footer from "@/Components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import React, { use, useEffect, useState } from "react";
+import axios from "axios";
 
 const page = ({ params }) => {
   const { id } = use(params);
   const [data, setData] = useState(null);
 
-  const fetchBlogData = () => {
-    for (let i = 0; i < blog_data.length; i++) {
-      if (Number(id) === blog_data[i].id) {
-        setData(blog_data[i]);
-        console.log(blog_data[i]);
-        break;
-      }
-    }
+  const fetchBlogData = async () => {
+    const response = await axios.get("/api/blog", {
+      params: {
+        id: id,
+      },
+    });
+    setData(response.data);
   };
 
   useEffect(() => {
-    fetchBlogData()
-  },[]);
+    fetchBlogData();
+  }, []);
 
   return data ? (
     <>
@@ -48,7 +48,7 @@ const page = ({ params }) => {
           </h1>
           <Image
             className="mx-auto mt-6 border border-white rounded-full"
-            src={data.author_img}
+            src={data.authorImage}
             width={60}
             height={60}
             alt=""
@@ -58,6 +58,7 @@ const page = ({ params }) => {
           </p>
         </div>
       </div>
+
       <div className="mx-5 max-w-[800px] md:mx-auto mt-[-100px] mb-10">
         <Image
           className="border-4 border-black"
@@ -66,52 +67,65 @@ const page = ({ params }) => {
           height={720}
           alt=""
         />
+
         <h1 className="my-8 text-[26px] font-semibold text-blue-700">
           Introduction:
         </h1>
+
         <p>{data.description}</p>
+
         <h3 className="my-5 text-[18px] font-semibold">
           step 1: self-Reflection and goal Setting
         </h3>
+
         <p className="my-3">
           Before you can manage your lifestyle, you must have clear
           understanding of what you want to achieve.Start by reflection on your
           values, aspirations, and long-term goals.
         </p>
+
         <p className="my-3">
           Before you can manage your lifestyle, you must have clear
           understanding of what you want to achieve.Start by reflection on your
           values, aspirations, and long-term goals.
         </p>
+
         <h3 className="my-5 text-[18px] font-semibold">
           step 2: self-Reflection and goal Setting
         </h3>
+
         <p className="my-3">
           Before you can manage your lifestyle, you must have clear
           understanding of what you want to achieve.Start by reflection on your
           values, aspirations, and long-term goals.
         </p>
+
         <p className="my-3">
           Before you can manage your lifestyle, you must have clear
           understanding of what you want to achieve.Start by reflection on your
           values, aspirations, and long-term goals.
         </p>
+
         <h3 className="my-5 text-[18px] font-semibold">
           step 3: self-Reflection and goal Setting
         </h3>
+
         <p className="my-3">
           Before you can manage your lifestyle, you must have clear
           understanding of what you want to achieve.Start by reflection on your
           values, aspirations, and long-term goals.
         </p>
+
         <p className="my-3">
           Before you can manage your lifestyle, you must have clear
           understanding of what you want to achieve.Start by reflection on your
           values, aspirations, and long-term goals.
         </p>
+
         <h3 className="my-5 text-[18px] font-semibold text-green-500">
           Conclusion
         </h3>
+
         <p className="my-3">
           Managing your lifestyle is a continuous process that requires
           self-awareness, discipline, and adaptability. By implementing the
@@ -120,10 +134,12 @@ const page = ({ params }) => {
           small consistent changes can lead to significant improvements over
           time.
         </p>
+
         <div className="my-24">
           <p className="text-black font-semibold my-4">
             Share the article in social media
           </p>
+
           <div className="flex">
             <Image src={assets.facebook_icon} width={50} alt="" />
             <Image src={assets.twitter_icon} width={50} alt="" />
@@ -131,6 +147,7 @@ const page = ({ params }) => {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   ) : null;
