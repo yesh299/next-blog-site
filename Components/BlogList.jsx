@@ -8,8 +8,8 @@ const BlogList = () => {
   const [Blogs, setBlogs] = useState([]);
   const fetchBlogs = async () => {
     const response = await axios.get("/api/blog");
-    setBlogs(response.data.Blogs);
-    console.log(response.data.Blogs);
+    setBlogs(response.data.blogs);
+    console.log(response.data.blogs);
   };
 
   useEffect(() => {
