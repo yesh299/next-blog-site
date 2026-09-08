@@ -6,14 +6,26 @@ import axios from "axios";
 const BlogList = () => {
   const [Menu, setMenu] = useState("All");
   const [Blogs, setBlogs] = useState([]);
+  const [error, setError] = useState("");
   useEffect(() => {
     let cancelled = false;
 
-    axios.get("/api/blog").then((response) => {
-      if (!cancelled) {
-        setBlogs(response.data.blogs);
-      }
-    });
+    axios
+      .get("/api/blog")
+      .then((response) => {
+        if (!cancelled) {
+          setBlogs(response.data.blogs);
+          setError("");
+        }
+      })
+      .catch((requestError) => {
+        if (!cancelled) {
+          setError(
+            requestError.response?.data?.error ||
+              "Unable to load blogs right now.",
+          );
+        }
+      });
 
     return () => {
       cancelled = true;
@@ -61,6 +73,7 @@ const BlogList = () => {
         </button>
       </div>
       <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx24">
+        {error && <p className="w-full text-center text-red-600">{error}</p>}
         {Blogs.filter((item) =>
           Menu === "All" ? true : item.category === Menu,
         ).map((item, index) => {

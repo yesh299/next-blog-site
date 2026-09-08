@@ -6,14 +6,25 @@ const fs = require("fs");
 
 //API Endpoints to get All blogs
 export async function GET(request) {
-  await ConnectDB();
-  const blogId = request.nextUrl.searchParams.get("id");
-  if (blogId) {
-    const blog = await BlogModel.findById(blogId);
-    return NextResponse.json({ blog });
-  } else {
+  try {
+    await ConnectDB();
+    const blogId = request.nextUrl.searchParams.get("id");
+    if (blogId) {
+      const blog = await BlogModel.findById(blogId);
+      return NextResponse.json({ blog });
+    }
+
     const blogs = await BlogModel.find({});
     return NextResponse.json({ blogs });
+  } catch (error) {
+    console.error("Failed to load blogs:", error);
+    return NextResponse.json(
+      {
+        blogs: [],
+        error: "Unable to load blogs. Check the database configuration.",
+      },
+      { status: 500 },
+    );
   }
 }
 
