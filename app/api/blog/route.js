@@ -4,14 +4,9 @@ import { writeFile } from "fs/promises";
 import BlogModel from "@/lib/models/BlogModel";
 const fs = require("fs");
 
-const LoadDB = async () => {
-  await ConnectDB();
-};
-
-LoadDB();
-
 //API Endpoints to get All blogs
 export async function GET(request) {
+  await ConnectDB();
   const blogId = request.nextUrl.searchParams.get("id");
   if (blogId) {
     const blog = await BlogModel.findById(blogId);
@@ -24,6 +19,7 @@ export async function GET(request) {
 
 // API Endpoints For Uploading Blogs
 export async function POST(request) {
+  await ConnectDB();
   const formData = await request.formData();
   const timestamp = Date.now();
   const image = formData.get("image");
@@ -51,6 +47,7 @@ export async function POST(request) {
 
 // Creating API Endpoint to delete blog
 export async function DELETE(request) {
+  await ConnectDB();
   const id = await request.nextUrl.searchParams.get("id");
   const blog = await BlogModel.findById(id);
   fs.unlink(`./public${blog.image}`, () => {});

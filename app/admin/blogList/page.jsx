@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const page = () => {
+const BlogListPage = () => {
   const [blogs, setBlogs] = useState([]);
 
   const fetchBlogs = async () => {
@@ -24,7 +24,17 @@ const page = () => {
   };
 
   useEffect(() => {
-    fetchBlogs();
+    let cancelled = false;
+
+    axios.get("/api/blog").then((response) => {
+      if (!cancelled) {
+        setBlogs(response.data.blogs);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -69,4 +79,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default BlogListPage;

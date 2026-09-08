@@ -6,14 +6,18 @@ import axios from "axios";
 const BlogList = () => {
   const [Menu, setMenu] = useState("All");
   const [Blogs, setBlogs] = useState([]);
-  const fetchBlogs = async () => {
-    const response = await axios.get("/api/blog");
-    setBlogs(response.data.blogs);
-    console.log(response.data.blogs);
-  };
-
   useEffect(() => {
-    fetchBlogs();
+    let cancelled = false;
+
+    axios.get("/api/blog").then((response) => {
+      if (!cancelled) {
+        setBlogs(response.data.blogs);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (

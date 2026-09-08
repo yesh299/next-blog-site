@@ -34,3 +34,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Before deploying, add `MONGODB_URI` in the Vercel project settings under **Settings > Environment Variables** for the Production environment. Use the same MongoDB connection string as the local `.env` file, then redeploy. If MongoDB Atlas is used, allow connections from Vercel by configuring the Atlas network access rules.

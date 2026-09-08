@@ -7,22 +7,32 @@ import Link from "next/link";
 import React, { use, useEffect, useState } from "react";
 import axios from "axios";
 
-const page = ({ params }) => {
+const BlogPage = ({ params }) => {
   const { id } = use(params);
   const [data, setData] = useState(null);
 
-  const fetchBlogData = async () => {
-    const response = await axios.get("/api/blog", {
-      params: {
-        id: id,
-      },
-    });
-    setData(response.data);
-  };
-
   useEffect(() => {
-    fetchBlogData();
-  }, []);
+    let cancelled = false;
+
+    axios.get("/api/blog", { params: { id } }).then((response) => {
+      if (!cancelled) {
+        setData(response.data.blog);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [id]);
+
+  const authorImage =
+    typeof data?.authorImage === "string" && data.authorImage.trim()
+      ? data.authorImage.trim()
+      : assets.profile_icon;
+  const blogImage =
+    typeof data?.image === "string" && data.image.trim()
+      ? data.image.trim()
+      : blog_data[0]?.image;
 
   return data ? (
     <>
@@ -51,7 +61,7 @@ const page = ({ params }) => {
 
           <Image
             className="mx-auto mt-6 border border-white rounded-full"
-            src={data.author_img}
+            src={authorImage}
             width={60}
             height={60}
             alt=""
@@ -66,7 +76,7 @@ const page = ({ params }) => {
       <div className="mx-5 max-w-[800px] md:mx-auto mt-[-100px] mb-10">
         <Image
           className="border-4 border-black"
-          src={data.image}
+          src={blogImage}
           width={1280}
           height={720}
           alt=""
@@ -92,4 +102,4 @@ const page = ({ params }) => {
   ) : null;
 };
 
-export default page;
+export default BlogPage;

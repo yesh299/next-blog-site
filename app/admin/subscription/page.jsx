@@ -5,7 +5,7 @@ import axios, { Axios } from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const page = () => {
+const SubscriptionPage = () => {
   const [emails, setEmails] = useState([]);
 
   const fetchEmails = async () => {
@@ -28,7 +28,17 @@ const page = () => {
   };
 
   useEffect(() => {
-    fetchEmails();
+    let cancelled = false;
+
+    axios.get("/api/email").then((response) => {
+      if (!cancelled) {
+        setEmails(response.data.emails);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
@@ -68,4 +78,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SubscriptionPage;

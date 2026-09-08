@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 // state to hold the uploaded image file
-const page = () => {
+const AddProductPage = () => {
   const [image, setImage] = useState(null);
 
   // state to hold the form data for the new product/blog
@@ -112,4 +112,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AddProductPage;
