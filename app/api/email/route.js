@@ -17,3 +17,21 @@ export async function POST(request) {
   await EmailModel.create(emailData);
   return NextResponse.json({ success: true, msg: "Email Subscribed" });
 }
+
+{
+  /*Custome handler function for get method */
+}
+export async function GET(request) {
+  const emails = await EmailModel.find({});
+  return NextResponse.json({ emails });
+}
+
+
+{
+  /*Costume handler function for DELETE method */
+}
+export async function DELETE(Request){
+  const id = await Request.nextUrl.searchParams.get("id");
+  await EmailModel.findByIdAndDelete(id);
+  return NextResponse.json({success:true,msg:"email Deleted"})
+}

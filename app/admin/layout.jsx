@@ -6,18 +6,37 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Layout({ children }) {
   return (
-    <>
-      <div className="flex">
-        <ToastContainer theme="dark" />
-        <Sidebar />
-        <div className="flex flex-col w-full">
-          <div className="flex item-center justify-between w-full py-2.5 max:-h-[60px] px-12 border-b border-black">
-            <h3 className="font-medium">Admin Panel</h3>
-            <Image src={assets.profile_icon} width={40} alt="" />
-          </div>
-          {children}
+    <div className="flex items-stretch min-h-screen w-full">
+      
+      <ToastContainer theme="dark" />
+
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Main Content */}
+      <div className="flex flex-col flex-1 min-w-0 min-h-screen">
+
+        {/* Admin Header */}
+        <div className="h-[54px] shrink-0 flex items-center justify-between w-full px-4 sm:px-8 lg:px-12 border-b border-black">
+          <h3 className="font-medium">
+            Admin Panel
+          </h3>
+
+          <Image
+            src={assets.profile_icon}
+            width={40}
+            height={40}
+            alt="Profile"
+            className="w-8 h-8 sm:w-10 sm:h-10"
+          />
         </div>
+
+        {/* Page Content */}
+        <main className="flex-1 min-w-0">
+          {children}
+        </main>
+
       </div>
-    </>
+    </div>
   );
 }

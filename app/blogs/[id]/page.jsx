@@ -32,13 +32,15 @@ const page = ({ params }) => {
             <Image
               src={assets.logo}
               width={180}
+              height={50}
               alt=""
-              className="w-[130px] sm:w-auto"
+              className="w-[130px] sm:w-auto h-auto"
             />
           </Link>
+
           <button className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-black shadow-[-7px_7px_0px_#000000]">
             Get Started
-            <Image src={assets.arrow} alt="" />
+            <Image src={assets.arrow} width={20} height={20} alt="" />
           </button>
         </div>
 
@@ -46,13 +48,15 @@ const page = ({ params }) => {
           <h1 className="text-2xl sm:text-5xl font-semibold max-w-[700px] mx-auto">
             {data.title}
           </h1>
+
           <Image
             className="mx-auto mt-6 border border-white rounded-full"
-            src={data.authorImage}
+            src={data.author_img}
             width={60}
             height={60}
             alt=""
           />
+
           <p className="mt-1 pb-2 text-lg text-green-500 max-w-[740px] mx-auto">
             {data.author}
           </p>
@@ -68,72 +72,7 @@ const page = ({ params }) => {
           alt=""
         />
 
-        <h1 className="my-8 text-[26px] font-semibold text-blue-700">
-          Introduction:
-        </h1>
-
-        <p>{data.description}</p>
-
-        <h3 className="my-5 text-[18px] font-semibold">
-          step 1: self-Reflection and goal Setting
-        </h3>
-
-        <p className="my-3">
-          Before you can manage your lifestyle, you must have clear
-          understanding of what you want to achieve.Start by reflection on your
-          values, aspirations, and long-term goals.
-        </p>
-
-        <p className="my-3">
-          Before you can manage your lifestyle, you must have clear
-          understanding of what you want to achieve.Start by reflection on your
-          values, aspirations, and long-term goals.
-        </p>
-
-        <h3 className="my-5 text-[18px] font-semibold">
-          step 2: self-Reflection and goal Setting
-        </h3>
-
-        <p className="my-3">
-          Before you can manage your lifestyle, you must have clear
-          understanding of what you want to achieve.Start by reflection on your
-          values, aspirations, and long-term goals.
-        </p>
-
-        <p className="my-3">
-          Before you can manage your lifestyle, you must have clear
-          understanding of what you want to achieve.Start by reflection on your
-          values, aspirations, and long-term goals.
-        </p>
-
-        <h3 className="my-5 text-[18px] font-semibold">
-          step 3: self-Reflection and goal Setting
-        </h3>
-
-        <p className="my-3">
-          Before you can manage your lifestyle, you must have clear
-          understanding of what you want to achieve.Start by reflection on your
-          values, aspirations, and long-term goals.
-        </p>
-
-        <p className="my-3">
-          Before you can manage your lifestyle, you must have clear
-          understanding of what you want to achieve.Start by reflection on your
-          values, aspirations, and long-term goals.
-        </p>
-
-        <h3 className="my-5 text-[18px] font-semibold text-green-500">
-          Conclusion
-        </h3>
-
-        <p className="my-3">
-          Managing your lifestyle is a continuous process that requires
-          self-awareness, discipline, and adaptability. By implementing the
-          strategies outlined in this blog, you can create a balanced and
-          fulfilling life that aligns with your values and goals. Remember,
-          small consistent changes can lead to significant improvements over
-          time.
-        </p>
+        <p>{data.description} </p>
 
         <div className="my-24">
           <p className="text-black font-semibold my-4">
@@ -141,9 +80,9 @@ const page = ({ params }) => {
           </p>
 
           <div className="flex">
-            <Image src={assets.facebook_icon} width={50} alt="" />
-            <Image src={assets.twitter_icon} width={50} alt="" />
-            <Image src={assets.googleplus_icon} width={50} alt="" />
+            <Image src={assets.facebook_icon} width={50} height={50} alt="" />
+            <Image src={assets.twitter_icon} width={50} height={50} alt="" />
+            <Image src={assets.googleplus_icon} width={50} height={50} alt="" />
           </div>
         </div>
       </div>
